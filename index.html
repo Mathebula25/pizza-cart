@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perfect Pizza</title>
+    <link rel="stylesheet" href="style.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+</head>
+
+<body x-data="{
+    mediumCount  : 0,
+    largeCount : 0,
+    smallCount :0,
+    mediumPrice : 89.00,
+    largePrice : 129.00,
+    smallPrice : 49.00,
+    amountEntered : 0,
+    message : '',
+    totalMedium (){
+       return this.mediumCount*this.mediumPrice
+    },
+    totalLarge (){
+        return this.largeCount*this.largePrice
+     },
+     totalSmall (){
+        return this.smallCount*this.smallPrice
+     },
+     total(){
+        return this.mediumCount*this.mediumPrice + this.largeCount*this.largePrice + this.smallCount*this.smallPrice
+     },
+     checkout(){
+       let totalCost = this.mediumCount*this.mediumPrice + this.largeCount*this.largePrice + this.smallCount*this.smallPrice;
+       console.log(this.mediumCount*this.mediumPrice + this.largeCount*this.largePrice + this.smallCount*this.smallPrice)
+       if (this.amountEntered < totalCost){
+        this.message = 'insuficient funds';
+             
+       }
+       else {
+        this.message = 'Enjoy you pizza!';
+        setTimeout(()=>{
+            this.mediumCount = '';
+             this.largeCount = '';
+             this.smallCount =''},3000)
+       }
+     },
+
+
+    }">
+
+    <div class="lighten-4">
+        <div class="row">
+            <div class="col s9 l9">
+                <h1 class=" z-depth-4 center-align">Perfect Pizza</h1>
+            </div>
+            <div class="col s3 l3"><img class="responsive-img circle" src="logo 3.webp" alt="Profile Image" width="200">
+            </div>
+        </div>
+    </div>
+
+    <div class="pizza2 details" x-show="mediumCount + largeCount + smallCount > 0">
+        <h3>shopping Cart</h3>
+        <div>
+            <span>Medium Pizza</span>
+            <button @click="mediumCount++">+</button>
+            <span x-text="mediumCount">0</span>
+            <button @click="mediumCount > 0 ? mediumCount-- : ''">-</button>
+            <span x-text=" 'R' + totalMedium()"></span>
+        </div>
+        <div>
+            <span>Large Pizza</span>
+            <button @click="largeCount++">+</button>
+            <span x-text="largeCount">0</span>
+            <button @click="largeCount > 0 ? largeCount-- : ''">-</button>
+            <span x-text=" 'R' + totalLarge()"></span>
+        </div>
+        <div>
+            <span>Small Pizza</span>
+            <button @click="smallCount++">+</button>
+            <span x-text="smallCount">0</span>
+            <button @click="smallCount > 0 ? smallCount-- : ''">-</button>
+            <span x-text=" 'R' + totalSmall()"></span>
+        </div>
+        <div>
+            <b><span>TOTAL COST : </span></b>
+            <b><span x-text=" 'R' + total()" style="color: rgb(179, 255, 0);"></span></b>
+            <p x-text="message"></p>
+        </div>
+        <div>
+            <span>Enter Amount</span>
+            <input type="" placeholder="Enter Amount" x-model="amountEntered">
+            <button @click="checkout()" >Pay</button>
+        </div>
+
+    </div>
+    <div>
+        <div class="pizzas">
+
+            <div class="pizza medium_Pizza" @click="mediumCount++">
+                <h3>Medium Pizza</h3>
+                <img src="pizza-one.png" width="100">
+                <h4>R89.00</h4>
+                <div>
+                    <img src="images/pizza 1.jpg" alt="pizza" width="400">
+                </div>
+                <div>
+                    <h5>Medium margeritha pizza with 3 toppings max</h5>
+                    <p>2 or less meat toppings</p>
+                    <p>3 or less other topings</p>
+                    <h4>Click to here to add to cart!!!</h4>
+                </div>
+            </div>
+
+            <div class="pizza Large_Pizza" @click="largeCount++">
+                <h3>Large Pizza</h3>
+                <img src="pizza-one.png" width="150">
+                <h4>R129.00</h4>
+                <div>
+                    <img src="images/pizza 2.webp" alt="pizza" width="450">
+                </div>
+                <div>
+                    <h5>Large margeritha pizza with 3 toppings max</h5>
+                    <p>3 meat toppings max</p>
+                    <p>3 or less other topings</p>
+                    <h4>Click to here to add to cart!!!</h4>
+                </div>
+            </div>
+
+            <div class="pizza Small_Pizza" @click="smallCount++">
+                <h3>Small Pizza</h3>
+                <img src="pizza-one.png" width="80">
+                <h4>R49.00</h4>
+                <div>
+                    <img src="images/pizza 3.jpg" alt="pizza" width="400">
+                </div>
+                <div>
+                    <h5>Small pizza with 3 toppings</h5>
+                    <p>1 meat topping</p>
+                    <p>3 or less other topings</p>
+                    <h4>Click to here to add to cart!!!</h4>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="pizza details">
+        <h4>Contact details</h4>
+        contact us at: 011 569 8533 infor@perfectpiza.co.za
+    </div>
+</body>
+
+</html>
